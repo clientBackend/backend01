@@ -9,10 +9,10 @@ const mongooseUrl = "mongodb+srv://dbBackend:clientbackend@cluster0.ycmie7z.mong
 async function mongooseConnect(){
     try{
         await mongoose.connect(mongooseUrl);
-        console.log("Connected");
+        console.log("Connected DB");
     }
     catch{
-        console.log("Error")
+        console.log("Error DB")
     }
 }
 mongooseConnect()
@@ -40,7 +40,7 @@ server.post("/",(req,res)=>{
             console.log("Saved")
         }
         catch{
-            console.log("NO")
+            console.log("NO SAVE")
         }
     }
     res.json({status:"Confirmed"});
@@ -48,4 +48,7 @@ server.post("/",(req,res)=>{
 })
 
 //Server Listening
-server.listen(8000);
+server.listen(8000 , ()=>{
+    console.log("Server On");
+}
+;
