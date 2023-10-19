@@ -3,7 +3,7 @@ const server = express();
 const cors = require("cors")
 const bodyParser = require("body-parser")
 const mongoose = require("mongoose");
-const mongooseUrl = "mongodb+srv://dbBackend:clientbackend@cluster0.ycmie7z.mongodb.net/ClientBackend"
+const mongooseUrl = "mongodb+srv://dbBackend:<password>@cluster0.ycmie7z.mongodb.net/"
 
 //Connect MONGO DB
 async function mongooseConnect(){
