@@ -50,5 +50,5 @@ server.post("/",(req,res)=>{
 //Server Listening
 server.listen(8000 , ()=>{
     console.log("Server On");
-}
+})
 ;
