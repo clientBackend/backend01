@@ -3,7 +3,7 @@ const server = express();
 const cors = require("cors")
 const bodyParser = require("body-parser")
 const mongoose = require("mongoose");
-const mongooseUrl = "mongodb+srv://dbBackend:<password>@cluster0.ycmie7z.mongodb.net/"
+const mongooseUrl = "mongodb+srv://dbBackend:clientbackend@cluster0.ycmie7z.mongodb.net/ClientBackend"
 
 //Connect MONGO DB
 async function mongooseConnect(){
@@ -26,6 +26,10 @@ server.use(cors());
 server.use(bodyParser.json());
 
 //API's
+server.get("/",(req,res)=>{
+    res.send("Hello World");
+})
+
 server.post("/",(req,res)=>{
     async function saveSchema(){
         let data = new schemaUse({
