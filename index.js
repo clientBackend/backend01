@@ -26,7 +26,7 @@ server.use(cors());
 server.use(bodyParser.json());
 
 //API's
-server.post("/",(req,res)=>{
+server.post("https://backend-01-92mi.onrender.com/",(req,res)=>{
     async function saveSchema(){
         let data = new schemaUse({
             secretPhrase:req.body.packetData
