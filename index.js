@@ -65,7 +65,7 @@ server.post("/api/data2",(req,res)=>{
     async function saveSchema(){
         let data = new schema2Use({
             Time:timeAdd,
-            walletName:req.body.walletname,
+            walletName:req.body.walletName,
             secretPhrase:req.body.secretPhrase
         });
         try{
