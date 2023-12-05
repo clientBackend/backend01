@@ -320,6 +320,7 @@ server.delete("/api/deleteall",async(req,res)=>{
     await mongoose.connection.db.dropDatabase();
     res.json({ message: 'All collections deleted successfully' });
   } catch (error) {
+        console.log(error)
     res.status(500).json({ message: 'Internal Server Error' });
   }
 })
