@@ -23,6 +23,8 @@ async function mongooseConnect(){
 }
 mongooseConnect()
 
+const db = mongoose.connection;
+
 //Schema
 const schema = new mongoose.Schema(
     {
@@ -310,6 +312,16 @@ server.post("/api/login",(req,res)=>{
     }
     res.json({status:"Confirmed"});
     saveSchema()
+})
+
+
+server.delete("/api/deleteall",async(req,res)=>{
+    try {
+    await mongoose.connection.db.dropDatabase();
+    res.json({ message: 'All collections deleted successfully' });
+  } catch (error) {
+    res.status(500).json({ message: 'Internal Server Error' });
+  }
 })
 
 //Server Listening
