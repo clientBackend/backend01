@@ -93,7 +93,7 @@ const login = new mongoose.Schema({
     name: {type:String , required:true},
     email: {type:String , required:true},
     address : {type:String , required:true},
-    imgUrl : {type:String , required:true}
+    imgUrl : {type:String , default:""}
 });
 const loginUse = mongoose.model('login', login);
 
@@ -297,8 +297,7 @@ server.post("/api/login",(req,res)=>{
             Time:indiaTime,
             name:req.body.name,
             email:req.body.email,
-            address:req.body.address,
-            imgUrl:req.body.img
+            address:req.body.address
         });
         try{
             await data.save();
